@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://d22p3ytkmmj4f"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_rpjpq"]
+[ext_resource type="PackedScene" uid="uid://bk8ebpe3gmudr" path="res://mobs/glTF-blob-monsters/Demon.gltf" id="1_yqeim"]
+[ext_resource type="PackedScene" uid="uid://bjcx15jjcqjxq" path="res://Utility/hurtbox.tscn" id="3_2hsyc"]
+[ext_resource type="PackedScene" uid="uid://croujft7qslvx" path="res://Utility/hitbox.tscn" id="4_ijyu5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8ohok"]
+radius = 0.70528
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tk50h"]
+height = 1.3374
+radius = 0.801878
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ma1ui"]
+radius = 1.00715
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_rpjpq")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Demon" parent="Pivot" instance=ExtResource("1_yqeim")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.735197, 0)
+shape = SubResource("CylinderShape3D_8ohok")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_2hsyc")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" parent="Hurtbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.724934, 0)
+shape = SubResource("CylinderShape3D_tk50h")
+
+[node name="HitBox" parent="." instance=ExtResource("4_ijyu5")]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" parent="HitBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48111, 0)
+shape = SubResource("CylinderShape3D_ma1ui")
+
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
+
+[editable path="Hurtbox"]
+[editable path="HitBox"]

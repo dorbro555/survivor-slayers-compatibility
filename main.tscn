@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://4cboxa8nhdt2"]
+
+[ext_resource type="PackedScene" uid="uid://d22p3ytkmmj4f" path="res://player.tscn" id="1_iclym"]
+[ext_resource type="PackedScene" uid="uid://do3igf65aucjc" path="res://Utility/enemy_spawner.tscn" id="3_lx0yf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l8mpq"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jwj03"]
+size = Vector3(150, 2, 150)
+
+[node name="Main" type="Node"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_l8mpq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_jwj03")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0724201, 0.997374, 0, -0.997374, -0.0724201, 0, 8, 0)
+
+[node name="Player" parent="." instance=ExtResource("1_iclym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.680617, 0)
+
+[node name="CameraPivot" type="Marker3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.680617, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot" groups=["camera"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11)
+projection = 1
+size = 19.0
+far = 100.0
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_lx0yf")]
