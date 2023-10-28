@@ -1,7 +1,7 @@
 extends Node3D
 
 
-@export var spawns: Array[Spawn_info] = []
+@export var enemy_spawns: Array[Spawn_info] = []
 
 @onready var player = get_tree().get_first_node_in_group('player')
 # Let's grab the camera to calculate what's inside the viewport
@@ -10,35 +10,56 @@ var camera : Camera3D
 var frustum_planes : Array[Plane]
 var spawn_position : Vector3
 
+var wave_timer : float = 0.0
+var total_time_elapsed : float = 0.0
+var last_spawn_time : float = 0.0
+var current_wave_idx : int = 0
+var current_wave : Spawn_info
+var current_enemy : Resource
+var enemy_spawn : Node = null
+
 var time = 0
 
 func _ready():
 	setupReferences()
+	for i in range(current_wave.enemy_min):
+		enemy_spawn = current_enemy.instantiate()
+		enemy_spawn.transform.origin = get_random_position()
+		add_child(enemy_spawn)
+# clear our the variable
+	enemy_spawn = null
 	
-
-func _on_timer_timeout():
-	time += 1
-	var enemy_spawns = spawns
-	for i in enemy_spawns:
-		if time >= i.time_start and time <= i.time_end:
-			if i.spawn_delay_counter < i.enemy_spawn_delay:
-				i.spawn_delay_counter += 1
-			else:
-				i.spawn_delay_counter = 0
-				var new_enemy = i.enemy
-				var counter = 0
-				while counter < i.enemy_num:
-					var enemy_spawn = new_enemy.instantiate()
-					enemy_spawn.transform.origin = get_random_position()
-#					print('enemy spawned at: ', enemy_spawn.transform.origin)
-					add_child(enemy_spawn)
-					counter += 1
-
+func _process(delta):
+	wave_timer += delta
+#	 May not need the below
+	total_time_elapsed += delta
+#	Check if we need to update the wave to the next enemy
+	if wave_timer >= current_wave.time_length:
+		current_wave_idx += 1
+		wave_timer = 0.0
+#		redefine the current enemy spawn
+		current_wave = enemy_spawns[current_wave_idx]
+		current_enemy = current_wave.enemy
+#	Lets check if it's been atleast 1 second since the last spawn
+	if wave_timer - last_spawn_time  >= 1:
+#		Define the amount of spawns needed
+		var spawn_amount = (last_spawn_time - wave_timer) / current_wave.enemy_spawn_delay
+		for i in range(spawn_amount):
+#			Lets create and store an instance of our SpawnInfo class
+			enemy_spawn = current_enemy.instantiate()
+			enemy_spawn.transform.origin = get_random_position()
+			add_child(enemy_spawn)
+#			clear out the variable for the next iteration
+			enemy_spawn = null
 
 func setupReferences():
 	# Initialize variables
+#	Lets start with the camera variables
 	camera = get_tree().get_first_node_in_group('camera')
 	frustum_planes = camera.get_frustum()
+	# Then our initial wave spawn, spawning up to the minimum
+	current_wave = enemy_spawns[current_wave_idx]
+	current_enemy = current_wave.enemy
 
 func get_random_position():
 	

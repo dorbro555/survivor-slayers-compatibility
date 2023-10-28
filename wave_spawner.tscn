@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0bqd37xxmqly"]
+
+[ext_resource type="Script" path="res://WaveSpawner.gd" id="1_31wi0"]
+
+[node name="WaveSpawner" type="Node3D"]
+script = ExtResource("1_31wi0")
+
+[node name="RoundTimer" type="Timer" parent="."]
