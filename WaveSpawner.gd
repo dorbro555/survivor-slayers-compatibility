@@ -16,6 +16,7 @@ var last_spawn_time : float = 0.0
 var current_wave_idx : int = 0
 var current_wave : Spawn_info
 var current_enemy : Resource
+var current_enemy_count : int
 var enemy_spawn : Node = null
 
 var time = 0
@@ -26,6 +27,7 @@ func _ready():
 		enemy_spawn = current_enemy.instantiate()
 		enemy_spawn.transform.origin = get_random_position()
 		add_child(enemy_spawn)
+	current_enemy_count = current_wave.enemy_min
 # clear our the variable
 	enemy_spawn = null
 	
@@ -33,6 +35,7 @@ func _process(delta):
 	wave_timer += delta
 #	 May not need the below
 	total_time_elapsed += delta
+	print(total_time_elapsed)
 #	Check if we need to update the wave to the next enemy
 	if wave_timer >= current_wave.time_length:
 		current_wave_idx += 1
@@ -40,17 +43,27 @@ func _process(delta):
 #		redefine the current enemy spawn
 		current_wave = enemy_spawns[current_wave_idx]
 		current_enemy = current_wave.enemy
+		current_enemy_count = 0
 #	Lets check if it's been atleast 1 second since the last spawn
-	if wave_timer - last_spawn_time  >= 1:
+	if total_time_elapsed - last_spawn_time  >= 1:
+#		First lets check if we need to spawn up to the minimum
+		if current_enemy_count < current_wave.enemy_min:
+			for i in range(current_wave.enemy_min):
+				enemy_spawn = current_enemy.instantiate()
+				enemy_spawn.transform.origin = get_random_position()
+				add_child(enemy_spawn)
+				current_enemy_count += 1
 #		Define the amount of spawns needed
-		var spawn_amount = (last_spawn_time - wave_timer) / current_wave.enemy_spawn_delay
+		var spawn_amount = (wave_timer - last_spawn_time) / current_wave.enemy_spawn_delay
 		for i in range(spawn_amount):
 #			Lets create and store an instance of our SpawnInfo class
 			enemy_spawn = current_enemy.instantiate()
 			enemy_spawn.transform.origin = get_random_position()
 			add_child(enemy_spawn)
+			current_enemy_count += 1
 #			clear out the variable for the next iteration
 			enemy_spawn = null
+		last_spawn_time = total_time_elapsed
 
 func setupReferences():
 	# Initialize variables

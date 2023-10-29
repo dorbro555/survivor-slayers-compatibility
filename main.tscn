@@ -22,7 +22,7 @@ enemy_spawn_delay = 1.0
 script = ExtResource("4_vsm8s")
 time_length = 15
 enemy = ExtResource("3_cwm0x")
-enemy_min = 10
+enemy_min = 50
 enemy_spawn_delay = 2.0
 
 [node name="Main" type="Node"]
