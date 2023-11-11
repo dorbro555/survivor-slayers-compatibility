@@ -35,7 +35,7 @@ func _process(delta):
 	wave_timer += delta
 #	 May not need the below
 	total_time_elapsed += delta
-	print(total_time_elapsed)
+#	print(total_time_elapsed)
 #	Check if we need to update the wave to the next enemy
 	if wave_timer >= current_wave.time_length:
 		current_wave_idx += 1
@@ -107,5 +107,5 @@ func get_random_position():
 
 	var x_spawn = randf_range(spawn_pos1.x, spawn_pos2.x)
 	var z_spawn = randf_range(spawn_pos1.z,spawn_pos2.z)
-	print(spawn_pos1, spawn_pos2, Vector3(x_spawn,0, z_spawn))
+#	print(spawn_pos1, spawn_pos2, Vector3(x_spawn,0, z_spawn))
 	return Vector3(x_spawn,0, z_spawn)

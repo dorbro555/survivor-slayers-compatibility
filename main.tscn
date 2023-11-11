@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://4cboxa8nhdt2"]
 
-[ext_resource type="PackedScene" uid="uid://d22p3ytkmmj4f" path="res://player.tscn" id="1_iclym"]
 [ext_resource type="PackedScene" uid="uid://b0bqd37xxmqly" path="res://wave_spawner.tscn" id="2_e3rfl"]
 [ext_resource type="PackedScene" uid="uid://cb4a7cggo0qsp" path="res://mob.tscn" id="3_cwm0x"]
 [ext_resource type="Script" path="res://Utility/spawn_info.gd" id="4_vsm8s"]
+[ext_resource type="PackedScene" uid="uid://ci7c3ng8r5q4p" path="res://Characters/barbarian.tscn" id="5_ahifu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l8mpq"]
 size = Vector3(150, 2, 150)
@@ -39,17 +39,17 @@ mesh = SubResource("BoxMesh_jwj03")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0724201, 0.997374, 0, -0.997374, -0.0724201, 0, 8, 0)
 
-[node name="Player" parent="." instance=ExtResource("1_iclym")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.680617, 0)
+[node name="WaveSpawner" parent="." instance=ExtResource("2_e3rfl")]
+enemy_spawns = Array[ExtResource("4_vsm8s")]([SubResource("Resource_rw8ty"), SubResource("Resource_bk057")])
 
-[node name="CameraPivot" type="Marker3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.680617, 0)
+[node name="Barbarian" parent="." groups=["player"] instance=ExtResource("5_ahifu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.53345, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot" groups=["camera"]]
+[node name="CameraPivot" type="Marker3D" parent="Barbarian"]
+transform = Transform3D(0.333333, 0, 0, 0, 0.235702, 0.235702, 0, -0.235702, 0.235702, 0, -0.516072, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Barbarian/CameraPivot" groups=["camera"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11)
 projection = 1
 size = 19.0
 far = 100.0
-
-[node name="WaveSpawner" parent="." instance=ExtResource("2_e3rfl")]
-enemy_spawns = Array[ExtResource("4_vsm8s")]([SubResource("Resource_rw8ty"), SubResource("Resource_bk057")])
