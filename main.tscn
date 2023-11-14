@@ -40,7 +40,7 @@ mesh = SubResource("BoxMesh_jwj03")
 transform = Transform3D(1, 0, 0, 0, -0.0724201, 0.997374, 0, -0.997374, -0.0724201, 0, 8, 0)
 
 [node name="WaveSpawner" parent="." instance=ExtResource("2_e3rfl")]
-enemy_spawns = Array[ExtResource("4_vsm8s")]([SubResource("Resource_rw8ty"), SubResource("Resource_bk057")])
+enemy_spawns = Array[ExtResource("4_vsm8s")]([SubResource("Resource_rw8ty"), SubResource("Resource_bk057"), null])
 
 [node name="Barbarian" parent="." groups=["player"] instance=ExtResource("5_ahifu")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.53345, 0)
