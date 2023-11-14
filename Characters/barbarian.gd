@@ -6,26 +6,34 @@ extends CharacterBody3D
 @export var fall_acceleration = 75
 @export var hp = 80
 @onready var _animation_player = $AnimationPlayer
+var direction_dict = {}
 
 var target_velocity = Vector3.ZERO
 
 
 func _physics_process(delta):
+	# Reset the direction and animation
 	var direction = Vector3.ZERO
+	_animation_player.pause()
 
 	if Input.is_action_pressed("move_right"):
 		direction.x += 1
-		_animation_player.play("Walk East")
 	if Input.is_action_pressed("move_left"):
 		direction.x -= 1
-		_animation_player.play( "Walk West")
 	if Input.is_action_pressed("move_back"):
 		direction.z += 1
-		_animation_player.play("Walk South")
 	if Input.is_action_pressed("move_forward"):
 		direction.z -= 1
-		_animation_player.play("Walk North")
 
+	if direction.x == 1:
+		_animation_player.play("Walk East") 
+	elif direction.x == -1:
+		_animation_player.play("Walk West")
+	elif direction.z == -1:
+		_animation_player.play("Walk North")
+	elif direction.z == 1:
+		_animation_player.play("Walk South")
+	
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 #		$Pivot.look_at(position + direction, Vector3.UP)
