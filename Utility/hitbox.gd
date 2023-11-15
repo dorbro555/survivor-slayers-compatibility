@@ -3,7 +3,7 @@ extends Area3D
 @export var damage = 1
 
 @onready var collision = $CollisionShape3D
-@onready var disableTimer = $DisableHitboxTimer
+@onready var disableTimer = $DisableHitBoxTimer
 
 func tempdisable():
 	collision.call_deferred('set','disabled',true)

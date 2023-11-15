@@ -1,13 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://b8d1hvcdpgav6"]
+[gd_scene load_steps=17 format=3 uid="uid://b8d1hvcdpgav6"]
 
 [ext_resource type="Texture2D" uid="uid://j3tha21w37np" path="res://Characters/SpikeFiend/SpikeFiendWalk.png" id="1_5a170"]
 [ext_resource type="Script" path="res://spike_fiend.gd" id="1_wplwn"]
 [ext_resource type="PackedScene" uid="uid://bjcx15jjcqjxq" path="res://Utility/hurtbox.tscn" id="2_sdqxw"]
 [ext_resource type="PackedScene" uid="uid://croujft7qslvx" path="res://Utility/hitbox.tscn" id="3_tm8hs"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_d3kdt"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wd8qc"]
 height = 0.400553
-radius = 0.267845
+radius = 0.231932
 
 [sub_resource type="Animation" id="Animation_xreo3"]
 length = 0.001
@@ -171,8 +171,14 @@ _data = {
 "Walk West": SubResource("Animation_aqwrb")
 }
 
-[node name="SpikeFiend" type="CharacterBody3D"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d3kdt"]
+height = 0.400553
+radius = 0.267845
+
+[node name="SpikeFiend" type="CharacterBody3D" groups=["enemy_spawn"]]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_wplwn")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
@@ -183,7 +189,7 @@ vframes = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0885282, 0)
-shape = SubResource("CylinderShape3D_d3kdt")
+shape = SubResource("CylinderShape3D_wd8qc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -191,11 +197,13 @@ libraries = {
 }
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_sdqxw")]
+collision_mask = 2
 
 [node name="CollisionShape3D" parent="Hurtbox" index="0"]
 shape = SubResource("CylinderShape3D_d3kdt")
 
 [node name="HitBox" parent="." instance=ExtResource("3_tm8hs")]
+collision_layer = 4
 
 [node name="CollisionShape3D" parent="HitBox" index="0"]
 shape = SubResource("CylinderShape3D_d3kdt")
