@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://cb4a7cggo0qsp"]
+
+[ext_resource type="Script" path="res://mob.gd" id="1_i2yum"]
+[ext_resource type="PackedScene" uid="uid://b8d1hvcdpgav6" path="res://spike_fiend.tscn" id="2_ur60m"]
+[ext_resource type="PackedScene" uid="uid://bjcx15jjcqjxq" path="res://Utility/hurtbox.tscn" id="3_ynsf3"]
+[ext_resource type="PackedScene" uid="uid://croujft7qslvx" path="res://Utility/hitbox.tscn" id="4_ehpd0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xyor2"]
+radius = 0.71153
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wstxs"]
+radius = 0.783979
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tb2fo"]
+radius = 0.904727
+
+[node name="Mob" type="CharacterBody3D" groups=["enemy_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.568904, 0)
+script = ExtResource("1_i2yum")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="SpikeFiend" parent="Pivot" instance=ExtResource("2_ur60m")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84605, 0)
+shape = SubResource("CylinderShape3D_xyor2")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_ynsf3")]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" parent="Hurtbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.809886, 0)
+shape = SubResource("CylinderShape3D_wstxs")
+
+[node name="HitBox" parent="." instance=ExtResource("4_ehpd0")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" parent="HitBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749826, 0)
+shape = SubResource("CylinderShape3D_tb2fo")
+
+[editable path="Hurtbox"]
+[editable path="HitBox"]

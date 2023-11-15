@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8d1hvcdpgav6"]
+[gd_scene load_steps=18 format=3 uid="uid://b8d1hvcdpgav6"]
 
 [ext_resource type="Texture2D" uid="uid://j3tha21w37np" path="res://Characters/SpikeFiend/SpikeFiendWalk.png" id="1_5a170"]
 [ext_resource type="Script" path="res://spike_fiend.gd" id="1_wplwn"]
+[ext_resource type="PackedScene" uid="uid://bjcx15jjcqjxq" path="res://Utility/hurtbox.tscn" id="2_sdqxw"]
+[ext_resource type="PackedScene" uid="uid://croujft7qslvx" path="res://Utility/hitbox.tscn" id="3_tm8hs"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_d3kdt"]
-height = 0.515136
+height = 0.400553
+radius = 0.267845
 
 [sub_resource type="Animation" id="Animation_xreo3"]
 length = 0.001
@@ -21,8 +24,8 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_hxq15"]
-resource_name = "Walk South"
+[sub_resource type="Animation" id="Animation_pondq"]
+resource_name = "Walk East"
 length = 0.9
 loop_mode = 1
 tracks/0/type = "value"
@@ -35,11 +38,11 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+"values": [54, 55, 56, 57, 58, 59, 60, 61, 62]
 }
 
-[sub_resource type="Animation" id="Animation_b1c88"]
-resource_name = "Walk SW"
+[sub_resource type="Animation" id="Animation_5hmgk"]
+resource_name = "Walk NE"
 length = 0.9
 loop_mode = 1
 tracks/0/type = "value"
@@ -52,23 +55,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [9, 10, 11, 12, 13, 14, 15, 16, 17]
-}
-
-[sub_resource type="Animation" id="Animation_aqwrb"]
-resource_name = "Walk West"
-length = 0.9
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [18, 19, 20, 21, 22, 23, 24, 25, 26]
+"values": [45, 46, 47, 48, 49, 50, 51, 52, 53]
 }
 
 [sub_resource type="Animation" id="Animation_jotnv"]
@@ -104,40 +91,6 @@ tracks/0/keys = {
 "values": [36, 37, 38, 39, 40, 41, 42, 43, 44]
 }
 
-[sub_resource type="Animation" id="Animation_5hmgk"]
-resource_name = "Walk NE"
-length = 0.9
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [45, 46, 47, 48, 49, 50, 51, 52, 53]
-}
-
-[sub_resource type="Animation" id="Animation_pondq"]
-resource_name = "Walk East"
-length = 0.9
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [54, 55, 56, 57, 58, 59, 60, 61, 62]
-}
-
 [sub_resource type="Animation" id="Animation_dscb4"]
 resource_name = "Walk SE"
 length = 0.9
@@ -155,6 +108,56 @@ tracks/0/keys = {
 "values": [63, 64, 65, 66, 67, 68, 69, 70, 71]
 }
 
+[sub_resource type="Animation" id="Animation_b1c88"]
+resource_name = "Walk SW"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_hxq15"]
+resource_name = "Walk South"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_aqwrb"]
+resource_name = "Walk West"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21, 22, 23, 24, 25, 26]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1vqf7"]
 _data = {
 "RESET": SubResource("Animation_xreo3"),
@@ -168,11 +171,18 @@ _data = {
 "Walk West": SubResource("Animation_aqwrb")
 }
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_a53t4"]
+height = 0.539
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gkpol"]
+height = 0.538882
+
 [node name="SpikeFiend" type="CharacterBody3D"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 script = ExtResource("1_wplwn")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
 texture = ExtResource("1_5a170")
 hframes = 9
 vframes = 8
@@ -185,3 +195,16 @@ shape = SubResource("CylinderShape3D_d3kdt")
 libraries = {
 "": SubResource("AnimationLibrary_1vqf7")
 }
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_sdqxw")]
+
+[node name="CollisionShape3D" parent="Hurtbox" index="0"]
+shape = SubResource("CylinderShape3D_a53t4")
+
+[node name="HitBox" parent="." instance=ExtResource("3_tm8hs")]
+
+[node name="CollisionShape3D" parent="HitBox" index="0"]
+shape = SubResource("CylinderShape3D_gkpol")
+
+[editable path="Hurtbox"]
+[editable path="HitBox"]
