@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://ci7c3ng8r5q4p"]
+[gd_scene load_steps=16 format=3 uid="uid://ci7c3ng8r5q4p"]
 
 [ext_resource type="Texture2D" uid="uid://cjeoq52jis77f" path="res://Characters/Barbarian/Barbarian-Light-Walk.png" id="1_5ccue"]
 [ext_resource type="Script" path="res://Characters/barbarian.gd" id="1_7n4wq"]
+[ext_resource type="PackedScene" uid="uid://bjcx15jjcqjxq" path="res://Utility/hurtbox.tscn" id="3_vpt72"]
+[ext_resource type="PackedScene" uid="uid://croujft7qslvx" path="res://Utility/hitbox.tscn" id="4_a0viv"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f6mgh"]
 height = 1.35529
@@ -186,3 +188,16 @@ shape = SubResource("CylinderShape3D_f6mgh")
 libraries = {
 "": SubResource("AnimationLibrary_mkfje")
 }
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_vpt72")]
+
+[node name="CollisionShape3D" parent="Hurtbox" index="0"]
+shape = SubResource("CylinderShape3D_f6mgh")
+
+[node name="HitBox" parent="." instance=ExtResource("4_a0viv")]
+
+[node name="CollisionShape3D" parent="HitBox" index="0"]
+shape = SubResource("CylinderShape3D_f6mgh")
+
+[editable path="Hurtbox"]
+[editable path="HitBox"]

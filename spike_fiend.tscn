@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b8d1hvcdpgav6"]
+[gd_scene load_steps=16 format=3 uid="uid://b8d1hvcdpgav6"]
 
 [ext_resource type="Texture2D" uid="uid://j3tha21w37np" path="res://Characters/SpikeFiend/SpikeFiendWalk.png" id="1_5a170"]
 [ext_resource type="Script" path="res://spike_fiend.gd" id="1_wplwn"]
@@ -171,12 +171,6 @@ _data = {
 "Walk West": SubResource("Animation_aqwrb")
 }
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_a53t4"]
-height = 0.539
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_gkpol"]
-height = 0.538882
-
 [node name="SpikeFiend" type="CharacterBody3D"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 script = ExtResource("1_wplwn")
@@ -199,12 +193,12 @@ libraries = {
 [node name="Hurtbox" parent="." instance=ExtResource("2_sdqxw")]
 
 [node name="CollisionShape3D" parent="Hurtbox" index="0"]
-shape = SubResource("CylinderShape3D_a53t4")
+shape = SubResource("CylinderShape3D_d3kdt")
 
 [node name="HitBox" parent="." instance=ExtResource("3_tm8hs")]
 
 [node name="CollisionShape3D" parent="HitBox" index="0"]
-shape = SubResource("CylinderShape3D_gkpol")
+shape = SubResource("CylinderShape3D_d3kdt")
 
 [editable path="Hurtbox"]
 [editable path="HitBox"]
